@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool fireWeapon;
+		public bool reloadWeapon;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -49,6 +50,11 @@ namespace StarterAssets
 		public void OnFireWeapon(InputValue value)
 		{
 			fireWeapon = value.isPressed;
+		}
+
+		public void OnReloadWeapon(InputValue value)
+		{
+			reloadWeapon = value.isPressed;
 		}
 
 		public void MoveInput(Vector2 newMoveDirection)
