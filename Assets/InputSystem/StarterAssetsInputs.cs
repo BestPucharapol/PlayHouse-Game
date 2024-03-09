@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool fireWeapon;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -45,6 +46,10 @@ namespace StarterAssets
 		}
 #endif
 
+		public void OnFireWeapon(InputValue value)
+		{
+			fireWeapon = value.isPressed;
+		}
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
