@@ -20,6 +20,8 @@ public class SerialMessageHandler : MonoBehaviour
     /// </summary>
     public float pollingRate = 10.0f;
 
+    public GameObject[] lights;
+
     /// <summary>
     /// Message read from serial
     /// </summary>
@@ -150,7 +152,27 @@ public class SerialMessageHandler : MonoBehaviour
         // Apply each sensor state to game object
         for (int i = indexPayload; i < IoTMessage.Length; i=i+2)
         {
-            Debug.Log("Sensor Value: " + IoTMessage[i] + ": " + IoTMessage[i+1]);
+            // Set GameObject active based on value
+            for (int j = 0; j < lights.Length; j++)
+            {
+                if (lights[j].name == IoTMessage[i])
+                {
+                    switch (IoTMessage[i + 1])
+                    {
+                        case "ON":
+                            lights[j].SetActive(true);
+                            break;
+                        case "OFF":
+                            lights[j].SetActive(false);
+                            break;
+                    }
+
+                    // Break out of loop after finish
+                    break;
+                }
+            }
+
+            Debug.Log("Sensor Value: " + IoTMessage[i] + ", " + IoTMessage[i+1]);
         }
     }
 
