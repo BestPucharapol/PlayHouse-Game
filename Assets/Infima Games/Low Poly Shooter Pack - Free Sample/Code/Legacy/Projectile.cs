@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-using InfimaGames.LowPolyShooterPack;
 using Random = UnityEngine.Random;
 
 public class Projectile : MonoBehaviour {
@@ -24,10 +23,8 @@ public class Projectile : MonoBehaviour {
 
 	private void Start ()
 	{
-		//Grab the game mode service, we need it to access the player character!
-		var gameModeService = ServiceLocator.Current.Get<IGameModeService>();
 		//Ignore the main player character's collision. A little hacky, but it should work.
-		Physics.IgnoreCollision(gameModeService.GetPlayerCharacter().GetComponent<Collider>(), GetComponent<Collider>());
+		Physics.IgnoreCollision(GameObject.Find("PlayerCapsule").GetComponentInChildren<Collider>(), GetComponent<Collider>());
 		
 		//Start destroy timer
 		StartCoroutine (DestroyAfter ());
@@ -114,8 +111,8 @@ public class Projectile : MonoBehaviour {
 		if (collision.transform.tag == "Target") 
 		{
 			//Toggle "isHit" on target object
-			collision.transform.gameObject.GetComponent
-				<TargetScript>().isHit = true;
+			//collision.transform.gameObject.GetComponent
+			//	<TargetScript>().isHit = true;
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
@@ -124,8 +121,8 @@ public class Projectile : MonoBehaviour {
 		if (collision.transform.tag == "ExplosiveBarrel") 
 		{
 			//Toggle "explode" on explosive barrel object
-			collision.transform.gameObject.GetComponent
-				<ExplosiveBarrelScript>().explode = true;
+			//collision.transform.gameObject.GetComponent
+			//	<ExplosiveBarrelScript>().explode = true;
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
@@ -134,8 +131,8 @@ public class Projectile : MonoBehaviour {
 		if (collision.transform.tag == "GasTank") 
 		{
 			//Toggle "isHit" on gas tank object
-			collision.transform.gameObject.GetComponent
-				<GasTankScript> ().isHit = true;
+			//collision.transform.gameObject.GetComponent
+			//	<GasTankScript> ().isHit = true;
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
