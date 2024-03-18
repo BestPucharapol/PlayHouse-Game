@@ -89,10 +89,16 @@ public class Weapon : MonoBehaviour
         // RayCast
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, target))
         {
-            Debug.Log(rayHit.collider.gameObject.name);
+            // Due to how Turrent is configured, we need to access parent first
+            Transform parentTransform = rayHit.transform.root;
 
-            if (rayHit.collider.CompareTag("Enemy"))
+            Debug.Log(rayHit.collider.gameObject.name);
+            Debug.Log("Parent? -> " + parentTransform.name);
+
+            if (parentTransform.CompareTag("Enemy"))
             {
+                parentTransform.GetComponent<HealthController>().Damage(damage);
+
                 Debug.Log("Hit enemy");
             }
         }
