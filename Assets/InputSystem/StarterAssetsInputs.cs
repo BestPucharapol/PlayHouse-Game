@@ -14,8 +14,11 @@ namespace StarterAssets
 		public bool sprint;
 		public bool fireWeapon;
 		public bool reloadWeapon;
+        public bool checkMagainze;
+		public bool checkChamber;
+		public bool chargeWeapon;
 
-		[Header("Movement Settings")]
+        [Header("Movement Settings")]
 		public bool analogMovement;
 
 		[Header("Mouse Cursor Settings")]
@@ -23,7 +26,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -55,6 +58,21 @@ namespace StarterAssets
 		public void OnReloadWeapon(InputValue value)
 		{
 			reloadWeapon = value.isPressed;
+		}
+
+		public void OnChargeWeapon(InputValue value)
+		{
+			chargeWeapon = value.isPressed;
+		}
+
+		public void OnCheckMagazine(InputValue value)
+		{
+			checkMagainze = value.isPressed;
+		}
+
+		public void OnCheckChamber(InputValue value)
+		{
+			checkChamber = value.isPressed;
 		}
 
 		public void MoveInput(Vector2 newMoveDirection)

@@ -21,8 +21,10 @@ public class Weapon : MonoBehaviour
     public LayerMask target;
 
     private StarterAssetsInputs _input;
-    private bool isShooting, isReadyToShoot, isReloading;
-    private int bulletsLeft, bulletsShot;
+    private bool isShooting, isReadyToShoot, isPlayingAnimation, isChambered;
+    private int bulletsLeft, bulletsShot, magazineLeft;
+
+    private Animator animator;
 
     #endregion
 
@@ -32,9 +34,13 @@ public class Weapon : MonoBehaviour
     {
         _input = transform.root.GetComponent<StarterAssetsInputs>();
 
-        bulletsLeft = magazineSize;
+        animator = GetComponent<Animator>();
+
+        magazineLeft = magazineSize;
+        bulletsLeft = magazineLeft;
         isReadyToShoot = true;
-        isReloading = false;
+        isPlayingAnimation = false;
+        isChambered = false;
     }
 
     // Start is called before the first frame update
@@ -59,17 +65,41 @@ public class Weapon : MonoBehaviour
     private void Input()
     {
         // Fire weapon
-        if (_input.fireWeapon && isReadyToShoot && !isReloading && bulletsLeft > 0)
+        if (_input.fireWeapon && isReadyToShoot && isChambered && bulletsLeft > 0)
         {
+            // Cancle firing if animation is playing
+            if (isPlayingAnimation)
+            {
+                _input.fireWeapon = false;
+                return;
+            }
+
             bulletsShot = bulletsPerTap;
             Fire();
             _input.fireWeapon = false;
         }
 
         // Reload wepaon
-        if (_input.reloadWeapon && !isReloading)
+        if (_input.reloadWeapon && !isPlayingAnimation)
         {
             Reload();
+        }
+
+        if (_input.chargeWeapon && !isPlayingAnimation)
+        {
+            ChargeWeapon();
+        }
+
+        // Check mag
+        if (_input.checkMagainze && !isPlayingAnimation)
+        {
+            CheckMagazine();
+        }
+
+        // Check chamber
+        if (_input.checkChamber && !isPlayingAnimation)
+        {
+            CheckChamber();
         }
     }
 
@@ -104,8 +134,14 @@ public class Weapon : MonoBehaviour
         }
 
         // Ammo handling
-        bulletsLeft--;
         bulletsShot--;
+        bulletsLeft--;
+        magazineLeft--;
+        if (bulletsLeft <= 0)
+        {
+            isChambered = false;
+        }
+
         Invoke("ResetShot", timeBetweenShooting);
 
         // Burst fire?
@@ -124,15 +160,81 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
-        isReloading = true;
-        Invoke("ReloadFinish", reloadTime);
+        isPlayingAnimation = true;
+        animator.Play("Mag Out 0", 0, 0f);
+        //Invoke("ReloadFinish", reloadTime);
     }
 
-    private void ReloadFinish()
+    // Animation Event
+    private void OnReloadFinish()
     {
-        bulletsLeft = magazineSize;
-        isReloading = false;
+        magazineLeft = magazineSize;
+        bulletsLeft = Mathf.Clamp(bulletsLeft + magazineLeft, 0, magazineSize + 1);
+        isPlayingAnimation = false;
         _input.reloadWeapon = false;
+    }
+
+    private void CheckMagazine()
+    {
+        Debug.Log("Bullets: " + magazineLeft);
+
+        isPlayingAnimation = true;
+        animator.Play("Mag Check 0");
+    }
+
+    // Animation Event
+    private void OnCheckMagazineFinish()
+    {
+        isPlayingAnimation = false;
+        _input.checkMagainze = false;
+    }
+
+    private void CheckChamber()
+    {
+        string msg = isChambered ? "Weapon is chambered" : "Weapon is NOT chambered";
+        Debug.Log(msg);
+
+        isPlayingAnimation = true;
+        animator.Play("Chamber Check", 0, 0f);
+    }
+
+    // Animation Event
+    private void OnCheckChamberFinish()
+    {
+        isPlayingAnimation = false;
+        _input.checkChamber = false;
+    }
+
+    private void ChargeWeapon()
+    {
+        isPlayingAnimation = true;
+        animator.Play("Chamber Charge", 0, 0f);
+    }
+
+    // Animation Event
+    private void OnChargeWeaponFinish()
+    {
+        // Feed a round, no changes to ammunition
+        if (!isChambered)
+        {
+            isChambered = true;
+        }
+        // Eject round if chambered
+        else
+        {
+            // Reduce ammunition
+            if(magazineLeft > 0) magazineLeft--;
+            if (bulletsLeft > 0) bulletsLeft--;
+
+            // If it's last bullet, render weapon empty
+            if (bulletsLeft == 0)
+            {
+                isChambered = false;
+            }
+        }
+        
+        isPlayingAnimation = false;
+        _input.chargeWeapon = false;
     }
 
     #endregion

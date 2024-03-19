@@ -69,24 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Charge Weapon",
-                    "type": "Button",
-                    "id": "dc930cc0-31b0-45c0-9679-364fdd776745",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Change Firemode",
-                    "type": "Button",
-                    "id": "1219caa1-9fb2-4499-bcb2-d021c204a653",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Check Magazine",
                     "type": "Button",
                     "id": "24534542-0a97-4a6d-9d6e-205daa0d09a4",
@@ -96,9 +78,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Charge Weapon",
+                    "type": "Button",
+                    "id": "dc930cc0-31b0-45c0-9679-364fdd776745",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Check Chamber",
                     "type": "Button",
                     "id": "6eb3a771-3454-46cd-851e-d162a759f193",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Change Firemode",
+                    "type": "Button",
+                    "id": "1219caa1-9fb2-4499-bcb2-d021c204a653",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -348,94 +348,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7a6e784f-a37b-4fbf-9a10-b4a23ab4155a",
-                    "path": "<Keyboard>/numpad0",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Magazine",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "One Modifier",
-                    "id": "5268fc3d-3427-48c9-a79a-590095dde9cb",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Check Magazine",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "b9c54007-d1da-41b5-98b1-9d7a224dc7de",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Magazine",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "5b4fb30a-4469-4c09-a0f5-40f6a946f32c",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Magazine",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "93ff8fce-26cb-488e-b0ad-ade126aceb21",
-                    "path": "<Keyboard>/numpad1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Chamber",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "One Modifier",
-                    "id": "19fc3d9c-93e2-441c-89bf-f0fda5d53f3e",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Check Chamber",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "f55ba720-d4ce-466c-b7a7-92ff0e40f543",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Chamber",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "cbebaba5-6d22-4bbf-9b92-210f041f987f",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Chamber",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
                     "id": "80956b3a-3aef-4833-acfa-bdda362e2a77",
                     "path": "<Keyboard>/b",
                     "interactions": "",
@@ -459,7 +371,7 @@
                 {
                     "name": "",
                     "id": "662f024c-b4aa-4fda-b7b8-473e37e0b8c0",
-                    "path": "<Keyboard>/numpad2",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -468,37 +380,26 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "6358095a-e858-48da-b7bc-c8a3533a7e7d",
-                    "path": "OneModifier",
+                    "name": "",
+                    "id": "7a6e784f-a37b-4fbf-9a10-b4a23ab4155a",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Check Firemode",
-                    "isComposite": true,
+                    "groups": "KeyboardMouse",
+                    "action": "Check Magazine",
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
-                    "id": "21eba97f-f14e-4748-b4a1-73dfe7b67757",
-                    "path": "<Keyboard>/ctrl",
+                    "name": "",
+                    "id": "93ff8fce-26cb-488e-b0ad-ade126aceb21",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Check Firemode",
+                    "action": "Check Chamber",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "0d3185e4-d6ce-4a20-aa4d-cd74838473e0",
-                    "path": "<Keyboard>/n",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Check Firemode",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }
