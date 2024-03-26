@@ -179,6 +179,7 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        bulletsLeft -= magazineLeft;
         isPlayingAnimation = true;
         animator.Play("Mag Out 0", 0, 0f);
         //Invoke("ReloadFinish", reloadTime);
@@ -188,7 +189,8 @@ public class Weapon : MonoBehaviour
     private void OnReloadFinish()
     {
         magazineLeft = magazineSize;
-        bulletsLeft = Mathf.Clamp(bulletsLeft + magazineLeft, 0, magazineSize + 1);
+        bulletsLeft += magazineLeft;
+
         isPlayingAnimation = false;
         _input.reloadWeapon = false;
     }
