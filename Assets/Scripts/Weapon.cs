@@ -22,9 +22,21 @@ public class Weapon : MonoBehaviour
 
     private StarterAssetsInputs _input;
     private bool isShooting, isReadyToShoot, isPlayingAnimation, isChambered;
-    private int bulletsLeft, bulletsShot, magazineLeft;
+    private int bulletsShot;
 
     private Animator animator;
+
+    #endregion
+
+    #region FIELD SERIALIZED
+
+    [Header("Ammunition")]
+
+    [SerializeField]
+    private int magazineLeft;
+
+    [SerializeField]
+    private int bulletsLeft;
 
     #endregion
 
@@ -76,31 +88,38 @@ public class Weapon : MonoBehaviour
 
             bulletsShot = bulletsPerTap;
             Fire();
-            _input.fireWeapon = false;
         }
 
         // Reload wepaon
         if (_input.reloadWeapon && !isPlayingAnimation)
         {
             Reload();
+            return;
         }
 
         if (_input.chargeWeapon && !isPlayingAnimation)
         {
             ChargeWeapon();
+            return;
         }
 
         // Check mag
         if (_input.checkMagainze && !isPlayingAnimation)
         {
             CheckMagazine();
+            return;
         }
 
         // Check chamber
         if (_input.checkChamber && !isPlayingAnimation)
         {
             CheckChamber();
+            return;
         }
+
+        // Always life off trigger if no action is taken
+        _input.fireWeapon = false;
+        return;
     }
 
     private void Fire()
@@ -122,7 +141,7 @@ public class Weapon : MonoBehaviour
             // Due to how Turrent is configured, we need to access parent first
             Transform parentTransform = rayHit.transform.root;
 
-            Debug.Log(rayHit.collider.gameObject.name);
+            Debug.Log("Hit object name: " + rayHit.collider.gameObject.name);
             Debug.Log("Parent? -> " + parentTransform.name);
 
             if (parentTransform.CompareTag("Enemy"))
@@ -150,7 +169,7 @@ public class Weapon : MonoBehaviour
             Invoke("Fire", timeBetweenShots);
         }
 
-        Debug.Log(bulletsLeft);
+        Debug.Log("Total bullets: " + bulletsLeft);
     }
 
     private void ResetShot()
@@ -176,7 +195,7 @@ public class Weapon : MonoBehaviour
 
     private void CheckMagazine()
     {
-        Debug.Log("Bullets: " + magazineLeft);
+        Debug.Log("Bullets in magazine: " + magazineLeft);
 
         isPlayingAnimation = true;
         animator.Play("Mag Check 0");
@@ -214,17 +233,20 @@ public class Weapon : MonoBehaviour
     // Animation Event
     private void OnChargeWeaponFinish()
     {
-        // Feed a round, no changes to ammunition
-        if (!isChambered)
+        // Feed a round from magazine, no changes to overall ammo
+        // except ammo in magazine, if any
+        // Chamber only happens if there's ammo in magazine
+        if (!isChambered && magazineLeft > 0)
         {
             isChambered = true;
+            magazineLeft--;
         }
         // Eject round if chambered
         else
         {
             // Reduce ammunition
-            if(magazineLeft > 0) magazineLeft--;
             if (bulletsLeft > 0) bulletsLeft--;
+            if (magazineLeft > 0) magazineLeft--;
 
             // If it's last bullet, render weapon empty
             if (bulletsLeft == 0)
