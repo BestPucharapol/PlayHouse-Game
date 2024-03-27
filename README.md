@@ -18,6 +18,15 @@ In order to properly configure the values, please make sure that you can connect
 2. Inspect the `SerialController` GameObject in `Hierarchy` and configure the values under `Serial Controller (Script)`.
 3. Connect the Arduino board the your PC.
 
+## About Arduino boards
+
+There are [2 types of Arduino board](https://youtu.be/874COriDXcM?si=JfXqSHITAwyQpiT1): genuine and clone. Genuine boards come directly from Arduino's own manufacturing and are more expensive. Clone boards are manufactured by third-party sources, are much cheaper, and are widely available. Both types have the same functionalities and are interchangeable with each other since the schematics are open-source.
+
+Clone boards use [different USB to serial chip](https://cdn.sparkfun.com/datasheets/Dev/Arduino/Other/CH340DS1.PDF) which requires different driver to function. For more info on how to setup your Arduino board, please check out these links:
+
+- For clone board, see [How to Install CH340 Drivers](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all)
+- For genuine board, see [Getting Started with Arduino UNO](https://www.arduino.cc/en/Guide/ArduinoUno)
+
 ## Troubleshooting
 
 - If Unity fails to connect to Arduino board, please check that there is no other process accessing the serial communication port of Arduino, e.g., the `Serial Monitor` of Arduino IDE.
