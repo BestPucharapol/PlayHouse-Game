@@ -151,9 +151,9 @@ public class Weapon : MonoBehaviour
         }
 
         // Ammo handling
-        bulletsShot--;
-        bulletsLeft--;
-        magazineLeft--;
+        if (bulletsShot > 0) bulletsShot--;
+        if (bulletsLeft > 0) bulletsLeft--;
+        if (magazineLeft > 0) magazineLeft--;
         if (bulletsLeft <= 0)
         {
             isChambered = false;
