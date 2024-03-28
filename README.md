@@ -18,6 +18,16 @@ In order to properly configure the values, make sure that you can connect to the
 2. Inspect the `SerialController` GameObject in `Hierarchy` and configure the values under `Serial Controller (Script)`.
 3. Connect the Arduino board the your PC.
 
+Use mouse and keyboard to control the character:
+
+- Walk - WASD
+- Look - Mouse
+- Fire - Left mouse
+- Reload - R
+- Check magazine - T
+- Charge weapon - B
+- Check chamber - V
+
 ## About Arduino boards
 
 There are [2 types of Arduino board](https://youtu.be/874COriDXcM?si=JfXqSHITAwyQpiT1): genuine and clone. Genuine boards come directly from Arduino's own manufacturing and are more expensive. Clone boards are manufactured by third-party sources, are much cheaper, and are widely available. Both types have the same functionalities and are interchangeable with each other since the schematics are open-source.
